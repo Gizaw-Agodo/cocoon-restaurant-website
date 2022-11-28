@@ -1,0 +1,53 @@
+.product {
+    background: #262627;
+    border-radius: 10px;
+    cursor: pointer;
+    animation: animate 1s ease-in;
+    margin: 20px;
+    width: 250px;
+    height: 260px;
+    
+    
+}
+
+
+
+.product:hover {
+    transform: scale(1.05);
+    color: white;
+    transition: all 0.5s ease;
+    background-color: rgba(0, 0, 0, 0.8);
+
+}
+
+@keyframes animate {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+
+
+
+.product-content {
+    padding: 0px 20px;
+    padding-bottom: 15px;
+}
+
+.product-content h6 {
+    color: #f5b70a;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+}
+
+
+.price {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #f5b70a;
+}
