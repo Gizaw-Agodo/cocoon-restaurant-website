@@ -1,18 +1,17 @@
 import "./widjetSm.css";
 import { Visibility } from "@material-ui/icons";
 import { useEffect, useState } from "react";
-import { getUsers } from "../../api/auth";
-
+import { getUsers } from "../../api";
 
 export default function WidgetSm() {
-  const [users,setUsers] = useState()
+  const [users, setUsers] = useState();
 
-  useEffect(()=>{
-    getUsers().then((currusers)=>setUsers(currusers))
-  },[])
+  useEffect(() => {
+    getUsers().then((currusers) => setUsers(currusers));
+  }, []);
 
   return (
-    <div className="widgetSm">
+    <div className="widgetSm" >
       <span className="widgetSmTitle">New Join Members</span>
       <ul className="widgetSmList">
         {users?.map((user) => (

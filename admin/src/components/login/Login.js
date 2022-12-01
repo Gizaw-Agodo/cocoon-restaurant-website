@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { login } from "../../api/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../api";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const { isError } = useSelector((state) => state.user);
 
- const handleClick = (e)=>{
-  e.preventDefault()
-  login(dispatch,{email,password})
- }
+  const handleClick = (e) => {
+    e.preventDefault();
+    login(dispatch, { username, password });
+  };
 
   return (
     <div
@@ -22,11 +23,12 @@ const Login = () => {
         justifyContent: "center",
       }}
     >
+      <h3 style={{ marginBottom: "40px" }}>Cocoon Admin Login</h3>
       <input
         style={{ padding: 10, marginBottom: 20 }}
         type="text"
         placeholder="username"
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => setUsername(e.target.value)}
       />
       <input
         style={{ padding: 10, marginBottom: 20 }}
@@ -34,11 +36,14 @@ const Login = () => {
         placeholder="password"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button 
-      onClick={handleClick} style={{ padding: 10, width: 100 }}
-      >
+      <button onClick={handleClick} style={{ padding: 10, width: 100 }}>
         Login
       </button>
+      {isError && (
+        <h6 style={{ color: "red", marginTop: "20px", fontFamily: "Poppins" }}>
+          invalid username or user name
+        </h6>
+      )}
     </div>
   );
 };

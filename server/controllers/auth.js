@@ -22,9 +22,9 @@ const signUp = async (req, res, next) => {
 
 //loging in
 const logIn = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ username });
     if (!user) {
       return res.status(404).json({ message: "user not found" });
     }

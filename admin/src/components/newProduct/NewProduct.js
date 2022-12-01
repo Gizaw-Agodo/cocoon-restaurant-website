@@ -1,127 +1,110 @@
+import {getStorage,ref,uploadBytesResumable,getDownloadURL,} from "firebase/storage";
+import { createProductStart, setIsModal } from "../../redux/productRedux";
+import imgPlaceholder from "../../assets/placeholder.png";
+import { useDispatch, useSelector } from "react-redux";
+import { CircularProgress } from "@material-ui/core";
+import { Publish } from "@material-ui/icons";
+import { createProduct } from "../../api";
+import app from "../../firebase";
 import { useState } from "react";
 import "./newProduct.css";
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
-import app from "../../firebase";
-import { addProduct } from "../../redux/apiCalls";
-import { useDispatch } from "react-redux";
+
 
 export default function NewProduct() {
+  const dispatch = useDispatch();
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
-  const [cat, setCat] = useState([]);
-  const dispatch = useDispatch();
-
+  const { isFetching,isModal} = useSelector((state) => state.product);
+ 
+  // handling change
   const handleChange = (e) => {
-    setInputs((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
-    });
-  };
-  const handleCat = (e) => {
-    setCat(e.target.value.split(","));
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
-  const handleClick = (e) => {
+  // handling submit
+  const handleSubmit = (e) => {
     e.preventDefault();
     const fileName = new Date().getTime() + file.name;
     const storage = getStorage(app);
     const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, file);
-
-    // Register three observers:
-    // 1. 'state_changed' observer, called any time the state changes
-    // 2. Error observer, called on failure
-    // 3. Completion observer, called on successful completion
+    dispatch(createProductStart());
     uploadTask.on(
       "state_changed",
-      (snapshot) => {
-        // Observe state change events such as progress, pause, and resume
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
-        switch (snapshot.state) {
-          case "paused":
-            console.log("Upload is paused");
-            break;
-          case "running":
-            console.log("Upload is running");
-            break;
-          default:
-        }
-      },
-      (error) => {
-        // Handle unsuccessful uploads
-      },
+      (snapshot) => {},
+      (error) => {},
       () => {
-        // Handle successful uploads on complete
-        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          const product = { ...inputs, img: downloadURL, categories: cat };
-          addProduct(product, dispatch);
+          const product = { ...inputs, img: downloadURL };
+          createProduct(product, dispatch);
+          setTimeout(function () {
+            dispatch(setIsModal());
+          }, 5000);
         });
       }
     );
   };
 
-  return (
-    <div className="newProduct">
-      <h1 className="addProductTitle">New Product</h1>
-      <form className="addProductForm">
-        <div className="addProductItem">
-          <label>Image</label>
-          <input
-            type="file"
-            id="file"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
-        </div>
-        <div className="addProductItem">
-          <label>Title</label>
-          <input
-            name="title"
-            type="text"
-            placeholder="Apple Airpods"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="addProductItem">
-          <label>Description</label>
-          <input
-            name="desc"
-            type="text"
-            placeholder="description..."
-            onChange={handleChange}
-          />
-        </div>
-        <div className="addProductItem">
-          <label>Price</label>
-          <input
-            name="price"
-            type="number"
-            placeholder="100"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="addProductItem">
-          <label>Categories</label>
-          <input type="text" placeholder="jeans,skirts" onChange={handleCat} />
-        </div>
-        <div className="addProductItem">
-          <label>Stock</label>
-          <select name="inStock" onChange={handleChange}>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-        </div>
-        <button onClick={handleClick} className="addProductButton">
-          Create
-        </button>
-      </form>
+  return isFetching ? (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flex:2
+      }}
+    >
+      <CircularProgress />
+    </div>
+  ) : (
+    <div className="product">
+      <h3>create product</h3>
+      {isModal && (
+        <h5 style={{ color: "green", fontFamily: "Poppins" }}>
+          product Sucessfuly created
+        </h5>
+      )}
+      <div className="productBottom">
+        <form className="productForm">
+          <div className="productFormLeft">
+            <label>Product Name</label>
+            <input
+              type="text"
+              name="title"
+              style={{ width: "300px" }}
+              onChange={handleChange}
+            />
+            <label>Product Description</label>
+            <input type="text" name="desc" onChange={handleChange} />
+            <label>Price</label>
+            <input type="number" name="price" onChange={handleChange} />
+            <label>Catagory</label>
+            <input type="text" name="catagory" onChange={handleChange} />
+            <label>Type</label>
+            <input type="text" name="type" onChange={handleChange} />
+          </div>
+          <div className="productFormRight">
+            <div className="productUpload">
+              <img src={imgPlaceholder} alt="" className="productUploadImg" />
+              <label for="file" style={{ cursor: "pointer" }}>
+                <Publish />
+              </label>
+              <input
+                type="file"
+                id="file"
+                style={{ display: "none" }}
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+              <h6 style={{ textAlign: "center", marginTop: "0px" }}>
+                {file?.name}
+              </h6>
+            </div>
+            <button className="productButton" onClick={handleSubmit}>
+              Create
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

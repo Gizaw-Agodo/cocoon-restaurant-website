@@ -13,7 +13,7 @@ function Menu() {
 
   return (
     <div className="menu" name = "menu">
-      <h3 className="menu_title">Our Menu</h3>
+      <h3 className="menu_title">--Our Menu--</h3>
       <div className="btn_group" style={{marginTop:"40px"}}>
         <button
           className={`filter-btn ${filter === "DESERT" ? "active__btn" : ""}`}

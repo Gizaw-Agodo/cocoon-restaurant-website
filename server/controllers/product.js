@@ -3,7 +3,7 @@ const Product = require("../model/product");
 //get Products
 const getProducts = async (req, res, next) => {
   try {
-     products = await Product.find(req.query);
+     const products = await Product.find(req.query);
     res.status(200).json(products);
   } catch (error) {
     next(error);
@@ -45,10 +45,10 @@ const updateProduct = async (req, res, next) => {
 
 //delete Product
 const deleteProduct = async (req, res) => {
-  try{
-    const deleted = await Product.deleteMany()
-    res.status(200).json(deleted);
-
+  const id = req.params.id;
+  try {
+    const deleted = await Product.findByIdAndDelete(id);
+    res.status(200).json({ product: deleted, message: "successfuly deleted" });
   } catch (error) {
     next(error);
   }

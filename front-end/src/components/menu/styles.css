@@ -1,4 +1,5 @@
 .menu {
+    min-height: 100vh;
     /* margin-top: 90px; */
 }
 
@@ -6,7 +7,7 @@
 .menu_title {
     color: #f5b70a;
     font-weight: bold;
-    font-size: 35px;
+    font-size: 30px;
     text-align: center;
     margin: 10px;
 }
@@ -26,7 +27,7 @@
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 20px;
+    margin-right: 10px;
     
 }
 

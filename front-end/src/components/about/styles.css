@@ -1,0 +1,63 @@
+
+
+.about {
+    display: flex;
+    margin: 20px;
+    height: 100vh;
+}
+
+.about_info {
+    flex :1;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30;
+}
+
+.about_title {
+    text-align: center;
+    font-family: "Montez";
+    font-size: 55px;
+}
+
+.info_title {
+    font-family: "Montez";
+    margin: 30px;
+}
+
+.info_desc {
+
+}
+
+.about_images {
+    display: grid;
+    grid-template-columns: auto auto ;
+}
+.about_images img{
+    animation: animate 1s ease-in;
+    margin: 20px;
+   height: 190px;
+   
+}
+
+
+@media screen and (max-width: 992px) {
+.about {
+        display: flex;
+        flex-direction: column-reverse;
+        margin: 20px;
+    }
+
+    .about_images img {
+        height: 130px;
+    }
+}
+
+
+@media screen and (max-width: 772px) {
+    .about_images img {
+        
+        height: 130px;
+    }
+}

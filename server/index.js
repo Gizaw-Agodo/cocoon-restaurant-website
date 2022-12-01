@@ -1,5 +1,7 @@
 
 const productsRoute = require("./routes/products.js");
+const authRoute = require("./routes/auth.js")
+const userRoute = require("./routes/user.js")
 const bodyParser = require("body-parser");
 
 require("dotenv").config()
@@ -25,6 +27,8 @@ app.use((err, req, res, next) => {
 
 // //routes
 app.use("/products", productsRoute);
+app.use("/users", userRoute);
+app.use("/auth", authRoute);
 
 // connecting to database
 const port = process.env.port || 3001;
