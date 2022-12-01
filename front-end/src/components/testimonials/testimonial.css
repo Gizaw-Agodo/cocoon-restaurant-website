@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600&display=swap');
+
+.testimonial {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: calc(100vh - 100px);
+    color: #fff;
+    /* background-color: aqua; */
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+    
+}
+
+.swiper-pagination {
+    margin-bottom: 3rem;
+}
+
+.swiper-pagination-bullet {
+    height: 18px !important;
+    width: 18px !important;
+    background-color: rgb(221, 200, 200) !important ;
+}
+
+.swiper-pagination-bullet-active {
+    background-color:crimson !important;
+}
+
+.swiper-slide {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-testimonial {
+    width: 60%;
+    background-color: #fff;
+    border-radius: 1rem;
+}
+
+.user-info p{
+    color: #000;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.user-name {
+    margin-bottom: 0;
+    line-height: 1.1;
+}
+
+.user-job {
+    margin-top: 0;
+    line-height: 1.1;
+}
+
+.user-profile {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid rgba(220, 20, 60, 0.3);
+    margin-top: -75px;
+    box-shadow: 0 0 10px 10px rgba(220, 20, 60, 0.5);
+}
+
+.testimony {
+    color: #000;
+    font-family: 'Roboto slab', serif;
+}
+
+.user-comment {
+    width: 75%;
+}
+
+.bx {
+    font-size: 2.5rem;
+    color: crimson;
+}
+
+@media screen and (max-width: 768px) {
+    .user-testimonial {
+        width: 85%;
+    }
+
+    .user-comment {
+        width: 90%;
+    }
+}

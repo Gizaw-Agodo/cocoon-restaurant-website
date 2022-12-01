@@ -53,7 +53,7 @@ export default function App() {
         }}
         className="mySwiper"
       >
-        {products.map((product) => (
+        {products?.map((product) => (
           <SwiperSlide
             style={{ position: "relative", border: "2px solid white" }}
           >
@@ -70,9 +70,6 @@ export default function App() {
             <img src={product.img} alt = "product.title"/>
           </SwiperSlide>
         ))}
-
-        
-        
       </Swiper>
     </div>
   );

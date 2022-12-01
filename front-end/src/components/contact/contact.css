@@ -1,0 +1,64 @@
+.contact {
+    width: 100%;
+    /* height: 100vh; */
+    /* background-color: aqua; */
+}
+
+.branch {
+    height: 70vh;
+    /* background-color:brown; */
+    border: 2px solid crimson;
+    border-radius: 1rem;
+}
+
+.branch-title {
+    font-size: 24px;
+    font-weight: 500;
+    padding: 1rem 0.2rem 0 0;
+}
+
+.bx {
+    font-size: 22px;
+    margin-right: 5px;
+    /* color: #000; */
+}
+
+.branch-info {
+    line-height: 1.1;
+}
+
+.branch-location {
+    height:40vh ;
+    width: 100%;
+    /* background-color: aqua; */
+}
+
+
+/* From style */
+
+/* .contact-form {
+    height: 40vh;
+} */
+
+.form {
+    width: 60%;
+}
+
+.user-name, .user-email, .user-comment {
+    width: 100%;
+    padding: 0.6rem;
+}
+
+.submit-btn {
+    padding: 0.6rem 2rem;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #0a071a;
+    color: white;
+    border-color: #fff;
+    border-radius: 5px;
+}
+
+
+
