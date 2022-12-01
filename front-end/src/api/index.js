@@ -4,10 +4,11 @@ const URL = axios.create({baseURL:"http://localhost:3001/"})
 
 
 export const getProducts = async (cat,type) => {
+  console.log({cat,type});
   try {
     const res = await axios.get(
       cat
-        ? `http://localhost:3001/products?category=${cat}`
+        ? `http://localhost:3001/products?catagory=${cat}`
         : (type? `http://localhost:3001/products?type=${type}`
           :"http://localhost:3001/products")
     );

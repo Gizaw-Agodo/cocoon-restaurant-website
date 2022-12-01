@@ -12,7 +12,7 @@ const { verifyAdmin } = require("../middleware/auth");
 // "/products/"
 router.get("/", getProducts);
 router.get("/:id", getProduct);
-router.post("/", createProduct);
-// router.patch("/:id", verifyAdmin, updateProduct);
-router.delete("/", deleteProduct);
+router.post("/",verifyAdmin,createProduct);
+router.patch("/:id", verifyAdmin, updateProduct);
+router.delete("/:id",verifyAdmin, deleteProduct);
 module.exports = router;

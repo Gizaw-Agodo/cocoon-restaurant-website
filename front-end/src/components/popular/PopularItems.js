@@ -1,17 +1,16 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
-// import "swiper/modules/effect-coverflow/effect-coverflow.min.css";
 import "./pagination.css";
 import "./navigation.css";
 import "./styles.css";
 import { Autoplay } from "swiper";
-import image from "../../assets/burger.jpg";
-import image2 from "../../assets/pizza1.png";
+
 import SwiperCore, {
   EffectCoverflow,
   Pagination,
   Navigation,
 } from "swiper/core";
+
 import { useEffect, useState } from "react";
 import { getProducts } from "../../api";
 SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
@@ -53,8 +52,9 @@ export default function App() {
         }}
         className="mySwiper"
       >
-        {products.map((product) => (
+        {products?.map((product) => (
           <SwiperSlide
+           key={product._id}
             style={{ position: "relative", border: "2px solid white" }}
           >
             <div
@@ -70,9 +70,6 @@ export default function App() {
             <img src={product.img} alt = "product.title"/>
           </SwiperSlide>
         ))}
-
-        
-        
       </Swiper>
     </div>
   );
